@@ -1,3 +1,5 @@
+import { errorHandler } from "./shared/errors/ErrorHandler";
+import { AppError } from "./shared/errors/AppError";
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
@@ -13,5 +15,14 @@ app.get("/health", (_req, res) => {
     status: "healthy",
   });
 });
+
+app.get("/test-error", () => {
+  throw new AppError(
+    "Test Error",
+    400
+  );
+});
+
+app.use(errorHandler);
 
 export default app;
