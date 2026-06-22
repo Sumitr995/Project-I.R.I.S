@@ -10,13 +10,17 @@ app.use(cors());
 app.use(helmet());
 app.use(express.json());
 
-app.get("/health", (_req, res) => {
+app.get("/api/v1/health", (_req, res) => {
   res.status(200).json({
     status: "healthy",
   });
 });
 
-app.get("/test-error", () => {
+app.get("/", (_req, res) => {
+  res.send("API is running!");
+});
+
+app.get("/api/v1/test-error", () => {
   throw new AppError(
     "Test Error",
     400
